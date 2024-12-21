@@ -1,11 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { useRef } from "react";
+import { useInView } from "framer-motion";
 
 export default function Hero() {
-  const [heroRef, isVisible] = useIntersectionObserver({
-    threshold: 0.1,
+  const ref = useRef(null);
+  const isInView = useInView(ref, {
+    once: false,
+    margin: "-100px",
   });
 
   const scrollToContact = () => {
@@ -13,7 +16,7 @@ export default function Hero() {
     if (element) {
       const offset = 80;
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      const offsetPosition = elementPosition + window.scrollY - offset; // Using scrollY instead of pageYOffset
 
       window.scrollTo({
         top: offsetPosition,
@@ -24,10 +27,10 @@ export default function Hero() {
 
   return (
     <section
-      ref={heroRef}
+      ref={ref}
       id="hero"
       className={`relative min-h-screen flex items-center bg-gradient-to-r from-purple-900 via-blue-900 to-black overflow-hidden pt-24 pb-16 px-4 md:px-0 transition-opacity duration-500 ${
-        isVisible ? "opacity-100" : "opacity-0"
+        isInView ? "opacity-100" : "opacity-0"
       }`}
     >
       {/* Animated background elements */}
@@ -95,6 +98,8 @@ export default function Hero() {
                 src="/founder.jpg"
                 alt="Abdessamie Allouane"
                 fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                priority
                 className="object-cover hover:scale-110 transition-transform duration-300"
               />
             </div>
