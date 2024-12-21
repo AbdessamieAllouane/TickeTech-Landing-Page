@@ -74,7 +74,7 @@ export default function Header() {
               onClick={() => scrollToSection("contact")}
               className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-full hover:opacity-90 transition-opacity"
             >
-              Get Started
+              Comming soon{" "}
             </button>
           </div>
 
@@ -155,7 +155,7 @@ export default function Header() {
                   `}
                   style={{ transitionDelay: "400ms" }}
                 >
-                  Get Started
+                  Comming soon{" "}
                 </button>
 
                 {/* Social Links */}
