@@ -8,16 +8,21 @@ export async function POST(request: Request) {
     const body = await request.json();
     const validatedData = contactFormSchema.parse(body);
 
-    // Save to database and use the submission ID in the response
+    // Save to database
     const submission = await prisma.contact.create({
       data: validatedData,
     });
 
-    // Send emails
-    await Promise.all([
-      sendAdminNotification(validatedData),
-      sendUserConfirmation(validatedData),
-    ]);
+    // Try to send emails but don't fail if they don't work
+    try {
+      await Promise.allSettled([
+        sendAdminNotification(validatedData),
+        sendUserConfirmation(validatedData),
+      ]);
+    } catch (emailError) {
+      console.error("Failed to send emails:", emailError);
+      // Continue execution - we don't want to fail the submission if emails fail
+    }
 
     return NextResponse.json(
       { message: "Form submitted successfully", id: submission.id },
