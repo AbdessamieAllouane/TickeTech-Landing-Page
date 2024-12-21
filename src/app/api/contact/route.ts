@@ -8,7 +8,7 @@ export async function POST(request: Request) {
     const body = await request.json();
     const validatedData = contactFormSchema.parse(body);
 
-    // Save to database
+    // Save to database and use the submission ID in the response
     const submission = await prisma.contact.create({
       data: validatedData,
     });
@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     ]);
 
     return NextResponse.json(
-      { message: "Form submitted successfully" },
+      { message: "Form submitted successfully", id: submission.id },
       { status: 200 }
     );
   } catch (error) {

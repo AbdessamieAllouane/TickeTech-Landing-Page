@@ -1,3 +1,4 @@
+import Image from "next/image";
 export default function Partners() {
   return (
     <section id="partners" className="py-20 bg-gray-900">
@@ -11,11 +12,14 @@ Our Official Partners        </h2>
             rel="noopener noreferrer"
             className="hover:opacity-75 transition-opacity"
           >
-            <img
-              src="/logo_anpt_02.png"
+            <Image src="/logo_anpt_02.png"
               alt="ANPT Logo"
               className="h-16 object-contain"
-            />
+              width={500}
+              height={100}
+                  priority
+              />
+            
           </a>
         </div>
       </div>

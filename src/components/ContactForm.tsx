@@ -93,13 +93,13 @@ export default function ContactForm() {
 
           {submitStatus === "success" && (
             <div className="mb-6 p-4 bg-green-500/10 border border-green-500 rounded-lg text-green-500 text-center">
-              Thank you for your interest! We'll be in touch soon.
+              {statusMessage}
             </div>
           )}
 
           {submitStatus === "error" && (
             <div className="mb-6 p-4 bg-red-500/10 border border-red-500 rounded-lg text-red-500 text-center">
-              Something went wrong. Please try again later.
+              {statusMessage}
             </div>
           )}
 
