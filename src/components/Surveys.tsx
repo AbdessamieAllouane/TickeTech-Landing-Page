@@ -1,11 +1,6 @@
 "use client";
-import { useState } from "react";
 
 export default function Surveys() {
-  const [userType, setUserType] = useState<"organizer" | "attendee" | null>(
-    null
-  );
-
   return (
     <section className="py-20 bg-gradient-to-b from-gray-900 to-black">
       <div className="container mx-auto px-6">

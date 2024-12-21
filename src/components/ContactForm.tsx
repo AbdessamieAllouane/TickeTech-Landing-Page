@@ -12,13 +12,6 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 export default function ContactForm() {
-  // Move the dynamic content to client-side only
-  const [currentYear, setCurrentYear] = useState("");
-
-  useEffect(() => {
-    setCurrentYear(new Date().getFullYear().toString());
-  }, []);
-
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -37,6 +30,7 @@ export default function ContactForm() {
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
