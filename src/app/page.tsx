@@ -5,7 +5,7 @@ import Partners from "@/components/Partners";
 import Surveys from "@/components/Surveys"; // Add this
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
-
+import "./globals.css";
 export default function Home() {
   return (
     <main className="min-h-screen">

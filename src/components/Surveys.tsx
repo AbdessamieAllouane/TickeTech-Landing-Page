@@ -25,7 +25,7 @@ export default function Surveys() {
                 ticketing.
               </p>
               <a
-                href="https://forms.gle/your-organizer-form-link"
+                href="https://forms.gle/9mP5w65AbKsjaGUu5"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-full hover:opacity-90 transition-all"
@@ -44,7 +44,7 @@ export default function Surveys() {
                 Tell us about your event booking and attendance experience.
               </p>
               <a
-                href="https://forms.gle/your-attendee-form-link"
+                href="https://forms.gle/5afdjfUcP5Wa7B3F8"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-full hover:opacity-90 transition-all"

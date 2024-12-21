@@ -68,9 +68,20 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
+        {/* Copyright and Credits */}
+        <div className="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400 text-sm space-y-2">
           <p>© {new Date().getFullYear()} TickeTech. All rights reserved.</p>
+          <p className="text-gray-500">
+            Developed and maintained by{" "}
+            <a
+              href="https://www.linkedin.com/in/abd-essamie-allouane-838554240/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-purple-400 hover:text-purple-300 transition-colors"
+            >
+              Abdessamie ALLOUANE
+            </a>
+          </p>
         </div>
       </div>
     </footer>
