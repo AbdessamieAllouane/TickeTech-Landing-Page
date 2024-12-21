@@ -1,28 +1,22 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "TickeTech - The Future of Event Management in Algeria",
+  title: "TickeTech - Revolutionary Event Management Platform",
   description:
-    "TickeTech revolutionizes event management in Algeria with secure digital ticketing, QR validation, smart promotion, and comprehensive analytics.",
-  keywords:
-    "event management, ticketing, Algeria, digital tickets, QR validation, event promotion",
-  authors: [{ name: "Abdessamie Allouane" }],
+    "Transform your event management experience with TickeTech. The all-in-one platform for event organizers, artists, and educators.",
+  metadataBase: new URL("https://ticke-tech-landing.vercel.app/"), 
   openGraph: {
-    title: "TickeTech - The Future of Event Management in Algeria",
+    title: "TickeTech - Revolutionary Event Management Platform",
     description:
-      "Revolutionizing event management in Algeria with secure digital ticketing and smart promotion.",
-    url: "https://ticketech.dz",
+      "Transform your event management experience with TickeTech. The all-in-one platform for event organizers, artists, and educators.",
+    url: "https://ticke-tech-landing.vercel.app/", 
     siteName: "TickeTech",
     images: [
       {
-        url: "/og-image.png", // Make sure to add this image to your public folder
+        url: "/og-image.png", 
         width: 1200,
         height: 630,
-        alt: "TickeTech Preview",
+        alt: "TickeTech Platform Preview",
       },
     ],
     locale: "en_US",
@@ -30,10 +24,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "TickeTech - The Future of Event Management in Algeria",
+    title: "TickeTech - Revolutionary Event Management Platform",
     description:
-      "Revolutionizing event management in Algeria with secure digital ticketing and smart promotion.",
-    images: ["/og-image.png"],
+      "Transform your event management experience with TickeTech. The all-in-one platform for event organizers, artists, and educators.",
+    images: ["/og-image.png"], 
+    creator: "@AbdessamieAll", 
   },
   robots: {
     index: true,
@@ -45,10 +40,7 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
-  verification: {
-    google: "your-google-verification-code", // Add this when you have it
-  },
+  }
 };
 
 export default function RootLayout({
@@ -58,14 +50,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <link rel="manifest" href="/manifest.json" />
-      
-        <meta name="theme-color" content="#4F46E5" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-      </head>
-      <body className={inter.className}>{children}</body>
+      <body>{children}</body>
     </html>
   );
 }

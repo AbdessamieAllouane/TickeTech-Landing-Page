@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { z } from "zod";
 
 const formSchema = z.object({
@@ -12,6 +12,13 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 export default function ContactForm() {
+  // Move the dynamic content to client-side only
+  const [currentYear, setCurrentYear] = useState("");
+
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear().toString());
+  }, []);
+
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -25,7 +32,11 @@ export default function ContactForm() {
     "idle" | "success" | "error"
   >("idle");
   const [statusMessage, setStatusMessage] = useState("");
+  const [isMounted, setIsMounted] = useState(false);
 
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -82,28 +93,120 @@ export default function ContactForm() {
       setIsSubmitting(false);
     }
   };
-
+  if (!isMounted) {
+    return null;
+  }
   return (
-    <section id="contact" className="py-20 bg-gray-900">
-      <div className="container mx-auto px-6">
+    <section id="contact" className="py-12 md:py-20 bg-gray-900">
+      <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-3xl font-bold text-white text-center mb-12">
-            Join Our Network of Event Organizers
+          <h2 className="text-3xl md:text-5xl font-bold text-white text-center mb-6 md:mb-8 bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500 bg-clip-text text-transparent">
+            Elevate Your Events
           </h2>
 
+          <div className="text-center space-y-4 mb-8 md:mb-12">
+            <p className="text-lg md:text-xl text-gray-200">
+              Seamless event management for creators who dare to be different
+            </p>
+            <p className="text-base md:text-lg text-gray-300 px-4">
+              From intimate workshops to grand festivals, we empower event
+              creators with the tools they need to succeed
+            </p>
+          </div>
+
+          <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 md:p-6 mb-8">
+            <p className="text-base md:text-lg text-gray-200 mb-4 text-center">
+              Why switch to us?
+            </p>
+            <ul className="space-y-3 text-gray-300">
+              <li className="flex items-center space-x-3 text-sm md:text-base">
+                <svg
+                  className="w-5 h-5 text-purple-400 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>
+                  All-in-one platform: ticketing, marketing, and analytics
+                </span>
+              </li>
+              <li className="flex items-center space-x-3 text-sm md:text-base">
+                <svg
+                  className="w-5 h-5 text-purple-400 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>Industry-lowest fees to maximize your revenue</span>
+              </li>
+              <li className="flex items-center space-x-3 text-sm md:text-base">
+                <svg
+                  className="w-5 h-5 text-purple-400 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>24/7 dedicated support for you and your attendees</span>
+              </li>
+              <li className="flex items-center space-x-3 text-sm md:text-base">
+                <svg
+                  className="w-5 h-5 text-purple-400 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>
+                  Be The First To Know When We Launch And Get Early Free Access
+                </span>
+              </li>
+            </ul>
+          </div>
+
           {submitStatus === "success" && (
-            <div className="mb-6 p-4 bg-green-500/10 border border-green-500 rounded-lg text-green-500 text-center">
-              {statusMessage}
+            <div className="mb-6 p-4 bg-green-500/10 border border-green-500 rounded-lg">
+              <p className="text-green-400 text-center text-sm md:text-base font-medium">
+                {statusMessage}
+              </p>
             </div>
           )}
 
           {submitStatus === "error" && (
-            <div className="mb-6 p-4 bg-red-500/10 border border-red-500 rounded-lg text-red-500 text-center">
-              {statusMessage}
+            <div className="mb-6 p-4 bg-red-500/10 border border-red-500 rounded-lg">
+              <p className="text-red-400 text-center text-sm md:text-base font-medium">
+                {statusMessage}
+              </p>
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
             <div>
               <input
                 type="text"
@@ -111,7 +214,7 @@ export default function ContactForm() {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Full Name"
-                className={`w-full px-4 py-3 bg-gray-800 text-white rounded-lg focus:ring-2 focus:ring-purple-500 ${
+                className={`w-full px-4 py-3 bg-gray-800/50 text-white rounded-lg focus:ring-2 focus:ring-purple-500 outline-none transition-colors ${
                   errors.name ? "border-red-500" : "border-gray-700"
                 }`}
                 disabled={isSubmitting}
@@ -128,7 +231,7 @@ export default function ContactForm() {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Email Address"
-                className={`w-full px-4 py-3 bg-gray-800 text-white rounded-lg focus:ring-2 focus:ring-purple-500 ${
+                className={`w-full px-4 py-3 bg-gray-800/50 text-white rounded-lg focus:ring-2 focus:ring-purple-500 outline-none transition-colors ${
                   errors.email ? "border-red-500" : "border-gray-700"
                 }`}
                 disabled={isSubmitting}
@@ -144,8 +247,8 @@ export default function ContactForm() {
                 name="company"
                 value={formData.company}
                 onChange={handleChange}
-                placeholder="Company Name"
-                className={`w-full px-4 py-3 bg-gray-800 text-white rounded-lg focus:ring-2 focus:ring-purple-500 ${
+                placeholder="Organization Name"
+                className={`w-full px-4 py-3 bg-gray-800/50 text-white rounded-lg focus:ring-2 focus:ring-purple-500 outline-none transition-colors ${
                   errors.company ? "border-red-500" : "border-gray-700"
                 }`}
                 disabled={isSubmitting}
@@ -160,9 +263,9 @@ export default function ContactForm() {
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
-                placeholder="Your Message"
-                rows={4}
-                className={`w-full px-4 py-3 bg-gray-800 text-white rounded-lg focus:ring-2 focus:ring-purple-500 ${
+                placeholder="What kind of events do you organize?"
+                rows={3}
+                className={`w-full px-4 py-3 bg-gray-800/50 text-white rounded-lg focus:ring-2 focus:ring-purple-500 outline-none transition-colors ${
                   errors.message ? "border-red-500" : "border-gray-700"
                 }`}
                 disabled={isSubmitting}
@@ -175,9 +278,9 @@ export default function ContactForm() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-3 rounded-lg hover:opacity-90 transition-all disabled:opacity-50"
+              className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-3 md:py-4 rounded-lg hover:opacity-90 transition-all disabled:opacity-50 text-base md:text-lg font-medium"
             >
-              {isSubmitting ? "Submitting..." : "Join Waiting List"}
+              {isSubmitting ? "Processing..." : "Join the Revolution"}
             </button>
           </form>
         </div>
