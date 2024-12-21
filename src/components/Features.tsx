@@ -1,4 +1,11 @@
+"use client";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+
 export default function Features() {
+  const [featuresRef, isVisible] = useIntersectionObserver({
+    threshold: 0.1,
+  });
+
   const features = [
     {
       title: "Secure Ticketing",
@@ -63,7 +70,13 @@ export default function Features() {
   ];
 
   return (
-    <section id="features" className="py-20 bg-gray-900">
+    <section
+      ref={featuresRef}
+      id="features"
+      className={`py-20 bg-gray-900 transition-opacity duration-500 ${
+        isVisible ? "opacity-100" : "opacity-0"
+      }`}
+    >
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white mb-4">

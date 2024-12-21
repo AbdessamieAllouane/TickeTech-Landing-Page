@@ -1,12 +1,17 @@
 "use client";
 
 import Image from "next/image";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 export default function Hero() {
+  const [heroRef, isVisible] = useIntersectionObserver({
+    threshold: 0.1,
+  });
+
   const scrollToContact = () => {
     const element = document.getElementById("contact");
     if (element) {
-      const offset = 80; // Height of fixed header
+      const offset = 80;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
 
@@ -19,8 +24,11 @@ export default function Hero() {
 
   return (
     <section
+      ref={heroRef}
       id="hero"
-      className="relative min-h-screen flex items-center bg-gradient-to-r from-purple-900 via-blue-900 to-black overflow-hidden pt-24 pb-16 px-4 md:px-0"
+      className={`relative min-h-screen flex items-center bg-gradient-to-r from-purple-900 via-blue-900 to-black overflow-hidden pt-24 pb-16 px-4 md:px-0 transition-opacity duration-500 ${
+        isVisible ? "opacity-100" : "opacity-0"
+      }`}
     >
       {/* Animated background elements */}
       <div className="absolute inset-0 opacity-20">
