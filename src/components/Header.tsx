@@ -49,7 +49,7 @@ export default function Header() {
             <Link href="/">
               <div className="relative w-32 h-10 md:w-40 md:h-12">
                 <Image
-                  src="/logo_social_col.png"
+                  src="logo_ticketech_org white.svg"
                   alt="Company Logo"
                   fill
                   style={{ objectFit: "contain" }}
