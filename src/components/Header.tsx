@@ -21,9 +21,10 @@ export default function Header() {
   }, [isMenuOpen]);
 
   const navItems = [
-    { name: "Features", href: "#features", icon: "🎯" },
     { name: "Hero", href: "#hero", icon: "🚀" },
+    { name: "Features", href: "#features", icon: "🎯" },
     { name: "Partners", href: "#partners", icon: "🤝" },
+    { name: "Survey", href: "#surveys", icon: "📊" },
     { name: "Contact", href: "#contact", icon: "📧" },
   ];
 
@@ -59,6 +60,7 @@ export default function Header() {
       });
     }
   };
+
   return (
     <>
       <header className="fixed w-full top-0 z-40 bg-black/80 backdrop-blur-md">
@@ -102,7 +104,11 @@ export default function Header() {
               className="md:hidden relative z-50 p-2 rounded-lg hover:bg-white/10 transition-colors"
               aria-label="Toggle menu"
             >
-              <RiMenu4Line className="w-8 h-8 text-white" />
+              {isMenuOpen ? (
+                <IoClose className="w-8 h-8 text-white" />
+              ) : (
+                <RiMenu4Line className="w-8 h-8 text-white" />
+              )}
             </button>
           </div>
         </nav>
@@ -116,10 +122,8 @@ export default function Header() {
             : "opacity-0 invisible pointer-events-none"
         }`}
       >
-        {/* Backdrop with faster blur transition */}
         <div className="absolute inset-0 bg-gray-900/85 backdrop-blur-md transition-opacity duration-300" />
 
-        {/* Menu Content - Faster animations */}
         <div className="relative h-full overflow-y-auto">
           {/* Menu Header */}
           <div className="sticky top-0 z-50 bg-gradient-to-b from-gray-900 to-gray-900/0 backdrop-blur-md">
@@ -144,7 +148,7 @@ export default function Header() {
           </div>
 
           <div className="flex flex-col px-6 py-8">
-            {/* Navigation Items - Faster animations */}
+            {/* Navigation Items */}
             <nav className="space-y-4 mb-12">
               {navItems.map((item, index) => (
                 <button
@@ -165,25 +169,25 @@ export default function Header() {
                   <span>{item.name}</span>
                 </button>
               ))}
+              {/* Add Coming Soon button to mobile menu */}
+              <button
+                onClick={() => scrollToSection("contact")}
+                className={`w-full flex items-center justify-center p-4
+                  text-white text-xl font-medium rounded-xl
+                  bg-gradient-to-r from-purple-600 to-blue-600
+                  hover:opacity-90 transform transition-all duration-200
+                  ${
+                    isMenuOpen
+                      ? "translate-x-0 opacity-100"
+                      : "-translate-x-8 opacity-0"
+                  }`}
+                style={{ transitionDelay: `${75 + navItems.length * 50}ms` }}
+              >
+                Coming Soon
+              </button>
             </nav>
 
-            {/* CTA Button - Faster animation */}
-            <button
-              onClick={() => scrollToSection("contact")}
-              className={`w-full bg-gradient-to-r from-purple-600 to-blue-600
-                text-white p-4 rounded-xl text-xl font-medium mb-12
-                hover:opacity-90 transition-all duration-200
-                transform ${
-                  isMenuOpen
-                    ? "translate-y-0 opacity-100"
-                    : "translate-y-8 opacity-0"
-                }`}
-              style={{ transitionDelay: "250ms" }}
-            >
-              Join Waiting List
-            </button>
-
-            {/* Social Links - Faster animation */}
+            {/* Social Links */}
             <div
               className={`mt-auto transform transition-all duration-200 ${
                 isMenuOpen
@@ -210,12 +214,6 @@ export default function Header() {
                     <span className="sr-only">{link.name}</span>
                   </a>
                 ))}
-              </div>
-
-              <div className="mt-8 text-center">
-                <p className="text-gray-400 text-sm">
-                  © {new Date().getFullYear()} TickeTech. All rights reserved.
-                </p>
               </div>
             </div>
           </div>

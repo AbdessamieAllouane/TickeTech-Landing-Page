@@ -2,7 +2,7 @@
 
 export default function Surveys() {
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-900 to-black">
+    <section id="surveys" className="py-20 bg-gradient-to-b from-gray-900 to-black">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
