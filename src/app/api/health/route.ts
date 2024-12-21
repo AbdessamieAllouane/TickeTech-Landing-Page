@@ -5,7 +5,6 @@ export const runtime = "nodejs";
 
 export async function GET() {
   try {
-    // Test database connection
     await prisma.$connect();
     return NextResponse.json({ status: "healthy", database: "connected" });
   } catch (error) {

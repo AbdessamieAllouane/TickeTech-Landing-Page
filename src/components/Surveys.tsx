@@ -14,7 +14,6 @@ export default function Surveys() {
           </p>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {/* Organizer Card */}
             <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl hover:transform hover:scale-105 transition-all duration-300">
               <div className="text-4xl mb-4">🎯</div>
               <h3 className="text-2xl font-bold text-white mb-4">
@@ -34,7 +33,6 @@ export default function Surveys() {
               </a>
             </div>
 
-            {/* Attendee Card */}
             <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl hover:transform hover:scale-105 transition-all duration-300">
               <div className="text-4xl mb-4">🎟️</div>
               <h3 className="text-2xl font-bold text-white mb-4">

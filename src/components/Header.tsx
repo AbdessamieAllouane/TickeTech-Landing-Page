@@ -66,7 +66,6 @@ export default function Header() {
       <header className="fixed w-full top-0 z-40 bg-black/80 backdrop-blur-md">
         <nav className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            {/* Logo */}
             <Link href="/" className="flex-shrink-0">
               <div className="relative w-32 h-10 md:w-40 md:h-12">
                 <Image
@@ -79,7 +78,6 @@ export default function Header() {
               </div>
             </Link>
 
-            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
               {navItems.map((item) => (
                 <button
@@ -98,7 +96,6 @@ export default function Header() {
               </button>
             </div>
 
-            {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="md:hidden relative z-50 p-2 rounded-lg hover:bg-white/10 transition-colors"
@@ -114,7 +111,6 @@ export default function Header() {
         </nav>
       </header>
 
-      {/* Mobile Menu Overlay */}
       <div
         className={`fixed inset-0 z-40 md:hidden transition-all duration-300 ${
           isMenuOpen
@@ -125,7 +121,6 @@ export default function Header() {
         <div className="absolute inset-0 bg-gray-900/85 backdrop-blur-md transition-opacity duration-300" />
 
         <div className="relative h-full overflow-y-auto">
-          {/* Menu Header */}
           <div className="sticky top-0 z-50 bg-gradient-to-b from-gray-900 to-gray-900/0 backdrop-blur-md">
             <div className="flex items-center justify-between px-6 py-4">
               <div className="relative w-32 h-10">
@@ -148,7 +143,6 @@ export default function Header() {
           </div>
 
           <div className="flex flex-col px-6 py-8">
-            {/* Navigation Items */}
             <nav className="space-y-4 mb-12">
               {navItems.map((item, index) => (
                 <button
@@ -169,7 +163,6 @@ export default function Header() {
                   <span>{item.name}</span>
                 </button>
               ))}
-              {/* Add Coming Soon button to mobile menu */}
               <button
                 onClick={() => scrollToSection("contact")}
                 className={`w-full flex items-center justify-center p-4
@@ -187,7 +180,6 @@ export default function Header() {
               </button>
             </nav>
 
-            {/* Social Links */}
             <div
               className={`mt-auto transform transition-all duration-200 ${
                 isMenuOpen

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { contactFormSchema } from "@/lib/validation/contact";
 
-export const runtime = "nodejs"; // Change from edge to nodejs runtime
+export const runtime = "nodejs"; 
 
 export async function POST(request: Request) {
   if (!process.env.DATABASE_URL) {
@@ -15,10 +15,8 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
 
-    // Validate the data
     const validatedData = contactFormSchema.parse(body);
 
-    // Save to database with error handling
     const submission = await prisma.contact
       .create({
         data: validatedData,

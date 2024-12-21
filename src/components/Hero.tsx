@@ -16,7 +16,7 @@ export default function Hero() {
     if (element) {
       const offset = 80;
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.scrollY - offset; // Using scrollY instead of pageYOffset
+      const offsetPosition = elementPosition + window.scrollY - offset; 
 
       window.scrollTo({
         top: offsetPosition,
@@ -33,7 +33,6 @@ export default function Hero() {
         isInView ? "opacity-100" : "opacity-0"
       }`}
     >
-      {/* Animated background elements */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute animate-pulse w-96 h-96 bg-purple-500 rounded-full -top-20 -left-20 blur-3xl" />
         <div className="absolute animate-pulse w-96 h-96 bg-blue-500 rounded-full -bottom-20 -right-20 blur-3xl" />
@@ -41,7 +40,6 @@ export default function Hero() {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Left Column - Company Description */}
           <div className="text-left space-y-6">
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
               The Future of Event Management in Algeria
@@ -91,7 +89,6 @@ export default function Hero() {
             </button>
           </div>
 
-          {/* Right Column - Founder Info */}
           <div className="text-center md:text-right">
             <div className="relative w-48 h-48 mx-auto md:ml-auto md:mr-0 mb-6 rounded-full overflow-hidden shadow-xl ring-4 ring-purple-500/30">
               <Image

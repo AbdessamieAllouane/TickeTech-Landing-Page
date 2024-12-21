@@ -1,7 +1,6 @@
 "use client";
 import { useRef } from "react";
-import { useInView } from "framer-motion"; // We'll use framer-motion instead
-
+import { useInView } from "framer-motion"; 
 export default function Features() {
   const ref = useRef(null);
   const isInView = useInView(ref, {
