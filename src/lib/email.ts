@@ -3,8 +3,9 @@ import { ContactFormData } from "./validation/contact";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+// Use Resend's default domain instead of ticketech.dz
 const ADMIN_EMAIL = "abdessamie.allouane@inttic.dz";
-const FROM_EMAIL = "noreply@ticketech.dz";
+const FROM_EMAIL = "onboarding@resend.dev"; // Use Resend's default sender
 
 export async function sendAdminNotification(data: ContactFormData) {
   if (!process.env.RESEND_API_KEY) {
@@ -48,7 +49,7 @@ export async function sendUserConfirmation(data: ContactFormData) {
 
   try {
     const { data: emailData, error } = await resend.emails.send({
-      from: FROM_EMAIL,
+      from: FROM_EMAIL, // Use Resend's default sender
       to: data.email,
       subject: "Thank you for contacting TickeTech",
       html: `
