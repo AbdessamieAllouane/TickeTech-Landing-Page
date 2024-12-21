@@ -2,11 +2,13 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { FaLinkedin, FaFacebook, FaInstagram } from "react-icons/fa";
+import { IoClose } from "react-icons/io5";
+import { RiMenu4Line } from "react-icons/ri";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Prevent body scroll when menu is open
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -19,10 +21,28 @@ export default function Header() {
   }, [isMenuOpen]);
 
   const navItems = [
-    { name: "Features", href: "#features" },
-    { name: "Hero", href: "#hero" },
-    { name: "Partners", href: "#partners" },
-    { name: "Contact", href: "#contact" },
+    { name: "Features", href: "#features", icon: "🎯" },
+    { name: "Hero", href: "#hero", icon: "🚀" },
+    { name: "Partners", href: "#partners", icon: "🤝" },
+    { name: "Contact", href: "#contact", icon: "📧" },
+  ];
+
+  const socialLinks = [
+    {
+      name: "LinkedIn",
+      url: "https://www.linkedin.com/company/ticketech",
+      icon: <FaLinkedin className="w-6 h-6" />,
+    },
+    {
+      name: "Facebook",
+      url: "https://web.facebook.com/people/TickeTech/61570660832185/",
+      icon: <FaFacebook className="w-6 h-6" />,
+    },
+    {
+      name: "Instagram",
+      url: "https://www.instagram.com/ticket_tech/",
+      icon: <FaInstagram className="w-6 h-6" />,
+    },
   ];
 
   const scrollToSection = (elementId: string) => {
@@ -31,7 +51,7 @@ export default function Header() {
     if (element) {
       const offset = 80;
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      const offsetPosition = elementPosition + window.scrollY - offset;
 
       window.scrollTo({
         top: offsetPosition,
@@ -39,159 +59,168 @@ export default function Header() {
       });
     }
   };
-
   return (
-    <header className="fixed w-full top-0 z-50 bg-black/80 backdrop-blur-md">
-      <nav className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link href="/">
+    <>
+      <header className="fixed w-full top-0 z-40 bg-black/80 backdrop-blur-md">
+        <nav className="container mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <Link href="/" className="flex-shrink-0">
               <div className="relative w-32 h-10 md:w-40 md:h-12">
                 <Image
-                  src="logo_ticketech_org white.svg"
-                  alt="Company Logo"
+                  src="/logo_ticketech_org_white.svg"
+                  alt="TickeTech Logo"
                   fill
                   style={{ objectFit: "contain" }}
                   priority
                 />
               </div>
             </Link>
-          </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-8">
+              {navItems.map((item) => (
+                <button
+                  key={item.name}
+                  onClick={() => scrollToSection(item.href.substring(1))}
+                  className="text-gray-300 hover:text-white transition-colors duration-200"
+                >
+                  {item.name}
+                </button>
+              ))}
               <button
-                key={item.name}
-                onClick={() => scrollToSection(item.href.substring(1))}
-                className="text-gray-300 hover:text-white transition-colors duration-200"
+                onClick={() => scrollToSection("contact")}
+                className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-full hover:opacity-90 transition-opacity"
               >
-                {item.name}
+                Coming Soon
               </button>
-            ))}
+            </div>
+
+            {/* Mobile Menu Toggle */}
             <button
-              onClick={() => scrollToSection("contact")}
-              className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-full hover:opacity-90 transition-opacity"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden relative z-50 p-2 rounded-lg hover:bg-white/10 transition-colors"
+              aria-label="Toggle menu"
             >
-              Comming soon{" "}
+              <RiMenu4Line className="w-8 h-8 text-white" />
             </button>
           </div>
+        </nav>
+      </header>
 
-          {/* Improved Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden relative z-50 p-3 rounded-lg hover:bg-gray-800/50 transition-colors"
-            aria-label="Toggle menu"
-          >
-            <div className="w-6 h-5 relative flex flex-col justify-between items-center">
-              <span
-                className={`w-full h-0.5 bg-white transform transition-all duration-300 ease-in-out ${
-                  isMenuOpen ? "rotate-45 translate-y-2.5" : ""
-                }`}
-              />
-              <span
-                className={`w-full h-0.5 bg-white transition-all duration-200 ease-in-out ${
-                  isMenuOpen ? "opacity-0 translate-x-3" : ""
-                }`}
-              />
-              <span
-                className={`w-full h-0.5 bg-white transform transition-all duration-300 ease-in-out ${
-                  isMenuOpen ? "-rotate-45 -translate-y-2.5" : ""
-                }`}
-              />
+      {/* Mobile Menu Overlay */}
+      <div
+        className={`fixed inset-0 z-40 md:hidden transition-all duration-300 ${
+          isMenuOpen
+            ? "opacity-100 visible"
+            : "opacity-0 invisible pointer-events-none"
+        }`}
+      >
+        {/* Backdrop with faster blur transition */}
+        <div className="absolute inset-0 bg-gray-900/85 backdrop-blur-md transition-opacity duration-300" />
+
+        {/* Menu Content - Faster animations */}
+        <div className="relative h-full overflow-y-auto">
+          {/* Menu Header */}
+          <div className="sticky top-0 z-50 bg-gradient-to-b from-gray-900 to-gray-900/0 backdrop-blur-md">
+            <div className="flex items-center justify-between px-6 py-4">
+              <div className="relative w-32 h-10">
+                <Image
+                  src="/logo_ticketech_org_white.svg"
+                  alt="TickeTech Logo"
+                  fill
+                  style={{ objectFit: "contain" }}
+                  priority
+                />
+              </div>
+              <button
+                onClick={() => setIsMenuOpen(false)}
+                className="p-2 rounded-lg hover:bg-white/10 transition-colors duration-200"
+                aria-label="Close menu"
+              >
+                <IoClose className="w-8 h-8 text-white" />
+              </button>
             </div>
-          </button>
-        </div>
+          </div>
 
-        {/* Improved Mobile Menu */}
-        <div
-          className={`fixed inset-0 bg-black/90 backdrop-blur-lg transition-all duration-300 md:hidden ${
-            isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
-          }`}
-          onClick={() => setIsMenuOpen(false)}
-        >
-          <div
-            className={`fixed inset-y-0 right-0 w-full max-w-sm bg-gradient-to-b from-gray-900 to-black transform transition-transform duration-500 ease-in-out px-6 py-20 ${
-              isMenuOpen ? "translate-x-0" : "translate-x-full"
-            }`}
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Mobile Menu Content */}
-            <div className="h-full flex flex-col">
-              {/* Navigation Items */}
-              <div className="flex-1 space-y-2">
-                {navItems.map((item, index) => (
-                  <button
-                    key={item.name}
-                    onClick={() => scrollToSection(item.href.substring(1))}
-                    className={`w-full text-left py-4 px-4 text-lg font-medium text-gray-300 
-                      hover:text-white hover:bg-white/5 rounded-xl transition-all duration-300
-                      transform ${
-                        isMenuOpen
-                          ? "translate-x-0 opacity-100"
-                          : "translate-x-8 opacity-0"
-                      }
-                    `}
-                    style={{ transitionDelay: `${150 + index * 50}ms` }}
+          <div className="flex flex-col px-6 py-8">
+            {/* Navigation Items - Faster animations */}
+            <nav className="space-y-4 mb-12">
+              {navItems.map((item, index) => (
+                <button
+                  key={item.name}
+                  onClick={() => scrollToSection(item.href.substring(1))}
+                  className={`w-full flex items-center space-x-4 p-4
+                    text-white text-xl font-medium rounded-xl
+                    bg-white/10 hover:bg-white/20
+                    transform transition-all duration-200
+                    ${
+                      isMenuOpen
+                        ? "translate-x-0 opacity-100"
+                        : "-translate-x-8 opacity-0"
+                    }`}
+                  style={{ transitionDelay: `${75 + index * 50}ms` }}
+                >
+                  <span className="text-2xl">{item.icon}</span>
+                  <span>{item.name}</span>
+                </button>
+              ))}
+            </nav>
+
+            {/* CTA Button - Faster animation */}
+            <button
+              onClick={() => scrollToSection("contact")}
+              className={`w-full bg-gradient-to-r from-purple-600 to-blue-600
+                text-white p-4 rounded-xl text-xl font-medium mb-12
+                hover:opacity-90 transition-all duration-200
+                transform ${
+                  isMenuOpen
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-8 opacity-0"
+                }`}
+              style={{ transitionDelay: "250ms" }}
+            >
+              Join Waiting List
+            </button>
+
+            {/* Social Links - Faster animation */}
+            <div
+              className={`mt-auto transform transition-all duration-200 ${
+                isMenuOpen
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-8 opacity-0"
+              }`}
+              style={{ transitionDelay: "300ms" }}
+            >
+              <h3 className="text-gray-300 text-sm font-medium mb-6 uppercase tracking-wider text-center">
+                Follow Us
+              </h3>
+              <div className="flex justify-center space-x-8">
+                {socialLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 text-gray-300 hover:text-white
+                      hover:bg-white/20 rounded-full
+                      transition-all duration-200"
                   >
-                    {item.name}
-                  </button>
+                    {link.icon}
+                    <span className="sr-only">{link.name}</span>
+                  </a>
                 ))}
               </div>
 
-              {/* Bottom Section */}
-              <div className="pt-6 mt-6 border-t border-gray-800">
-                <button
-                  onClick={() => scrollToSection("contact")}
-                  className={`w-full bg-gradient-to-r from-purple-600 to-blue-600 
-                    text-white px-6 py-4 rounded-xl text-lg font-medium
-                    hover:opacity-90 transition-all duration-300 transform
-                    ${
-                      isMenuOpen
-                        ? "translate-y-0 opacity-100"
-                        : "translate-y-8 opacity-0"
-                    }
-                  `}
-                  style={{ transitionDelay: "400ms" }}
-                >
-                  Comming soon{" "}
-                </button>
-
-                {/* Social Links */}
-                <div
-                  className={`mt-8 flex justify-center space-x-6 
-                  transform transition-all duration-300
-                  ${
-                    isMenuOpen
-                      ? "translate-y-0 opacity-100"
-                      : "translate-y-8 opacity-0"
-                  }
-                `}
-                  style={{ transitionDelay: "500ms" }}
-                >
-                  {/* Add your social media icons/links here */}
-                  <a
-                    href="#"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    <span className="sr-only">Twitter</span>
-                    {/* Twitter Icon */}
-                  </a>
-                  <a
-                    href="#"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    <span className="sr-only">LinkedIn</span>
-                    {/* LinkedIn Icon */}
-                  </a>
-                  {/* Add more social links as needed */}
-                </div>
+              <div className="mt-8 text-center">
+                <p className="text-gray-400 text-sm">
+                  © {new Date().getFullYear()} TickeTech. All rights reserved.
+                </p>
               </div>
             </div>
           </div>
         </div>
-      </nav>
-    </header>
+      </div>
+    </>
   );
 }
