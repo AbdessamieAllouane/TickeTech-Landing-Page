@@ -23,6 +23,7 @@ export default function Footer() {
     <footer className="bg-gray-900 text-white py-12">
       <div className="container mx-auto max-w-7xl px-6 sm:px-8 md:px-12 lg:px-16">
         <div className="flex flex-col md:flex-row md:justify-between items-center space-y-8 md:space-y-0">
+          
           {/* Contact Information */}
           <div className="text-center md:text-left">
             <h3 className="text-xl font-bold mb-4">Contact Us</h3>
