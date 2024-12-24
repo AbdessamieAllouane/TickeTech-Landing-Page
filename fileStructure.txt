@@ -1,0 +1,68 @@
+Project Structure:
+
+├── README.md
+├── eslint.config.mjs
+├── fileStructure.txt
+├── next.config.ts
+├── package-lock.json
+├── package.json
+├── postcss.config.mjs
+├── prisma
+│   ├── migrations
+│   │   ├── 20241221042434_init
+│   │   │   └── migration.sql
+│   │   ├── 20241224164217_add_users_table
+│   │   │   └── migration.sql
+│   │   └── migration_lock.toml
+│   ├── schema.prisma
+│   └── seed.mjs
+├── public
+│   ├── founder.jpg
+│   ├── logo_anpt_02.png
+│   ├── logo_social.svg
+│   ├── logo_social_col.png
+│   ├── logo_ticketech_org_white.svg
+│   ├── manifest.json
+│   └── og-image.png
+├── src
+│   ├── app
+│   │   ├── admin
+│   │   │   └── page.tsx
+│   │   ├── api
+│   │   │   ├── contact
+│   │   │   │   └── route.ts
+│   │   │   └── health
+│   │   │       └── route.ts
+│   │   ├── auth
+│   │   │   └── signin
+│   │   │       └── page.tsx
+│   │   ├── favicon.ico
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── components
+│   │   ├── ContactForm.tsx
+│   │   ├── Features.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Header.tsx
+│   │   ├── Hero.tsx
+│   │   ├── Partners.tsx
+│   │   └── Surveys.tsx
+│   ├── emails
+│   │   ├── ContactConfirmation.tsx
+│   │   └── ContactNotifications.tsx
+│   ├── lib
+│   │   ├── auth.ts
+│   │   ├── prisma.ts
+│   │   └── validation
+│   │       └── contact.ts
+│   ├── middleware.ts
+│   └── types
+│       ├── auth.ts
+│       └── contact.ts
+├── tailwind.config.ts
+├── tsconfig.json
+└── vercel.json
+
+
+
